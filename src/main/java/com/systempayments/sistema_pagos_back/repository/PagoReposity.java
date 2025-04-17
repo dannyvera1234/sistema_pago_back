@@ -10,9 +10,9 @@ import com.systempayments.sistema_pagos_back.enums.PagoStatus;
 import com.systempayments.sistema_pagos_back.enums.TypePagos;
 
 @Repository
-public interface PagoReposity extends JpaRepository<Pago, Long> {
+public interface PagoReposity extends JpaRepository<Pago, String> {
 
-    List<Pago> findByEstudianteCodigo(Long id);
+    List<Pago> findByEstudianteCodigo(String id);
 
     List<Pago> findByStatus(PagoStatus status);
 

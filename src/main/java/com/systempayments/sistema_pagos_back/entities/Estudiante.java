@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class Estudiante {
 
     @Id
-    private Long id;
+    private String id;
     @Column(unique = true)
     private String codigo;
     private String programaId;
