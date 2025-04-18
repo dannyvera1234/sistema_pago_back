@@ -1,5 +1,6 @@
 package com.systempayments.sistema_pagos_back.services;
 
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -64,6 +65,36 @@ public class PagoService {
         generyDto.setSuccess(true);
         generyDto.setCode(201);
         generyDto.setTimesTamp(System.currentTimeMillis() + "");
+        return generyDto;
+    }
+
+    /**
+     * Método que obtiene el archivo PDF asociado a un pago por su ID.
+     *
+     * @param pagoId ID del pago del cual se desea obtener el archivo.
+     * @return Un arreglo de bytes que representa el contenido del archivo.
+     * @throws Exception si ocurre un error al leer el archivo o no se encuentra el
+     *                   pago.
+     */
+    public byte[] getArhivoPorId(Long pagoId) throws Exception {
+        // Buscamos el pago en la base de datos a partir de su ID.
+        // El método get() lanza una excepción si no se encuentra el pago.
+        Pago pago = pagoReposity.findById(pagoId).get();
+
+        // Obtenemos la ruta del archivo desde el campo 'file' del objeto Pago.
+        // Luego convertimos esa ruta a un objeto Path para poder leer el archivo.
+        return Files.readAllBytes(Paths.get(URI.create(pago.getFile())));
+    }
+
+    public GeneryDto<Pago> aaactualizarPagoPorStutus(PagoStatus status, Long id) {
+        GeneryDto<Pago> generyDto = new GeneryDto<>();
+        Pago pago = pagoReposity.findById(id).get();
+        generyDto.setMessage("Pago saved successfully");
+        generyDto.setSuccess(true);
+        generyDto.setCode(201);
+        generyDto.setTimesTamp(System.currentTimeMillis() + "");
+        generyDto.setData(pago);
+
         return generyDto;
     }
 

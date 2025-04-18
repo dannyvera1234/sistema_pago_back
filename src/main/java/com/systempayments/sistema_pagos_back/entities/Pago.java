@@ -32,7 +32,8 @@ import lombok.AllArgsConstructor;
 public class Pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
+    private String codigo;
     private LocalDate fecha;
     private Double monto;
     private TypePagos type;
