@@ -14,7 +14,7 @@ import com.systempayments.sistema_pagos_back.entities.Pago;
 import com.systempayments.sistema_pagos_back.repository.EstudianteRepository;
 import com.systempayments.sistema_pagos_back.repository.PagoReposity;
 import com.systempayments.sistema_pagos_back.services.PagoService;
-import com.systempayments.sistema_pagos_back.ultils.ResponseUtil;
+import com.systempayments.sistema_pagos_back.utils.ResponseUtil;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,7 +49,6 @@ public class PagoController {
     public GeneryDto<List<Estudiante>> listarEstudiantesPorPrograma(@RequestParam String programaId) {
         return ResponseUtil.success(estudianteRepository.findByProgramaId(programaId),
                 "Estudiantes obtenidos exitosamente");
-
     }
 
     @GetMapping("/pagos")

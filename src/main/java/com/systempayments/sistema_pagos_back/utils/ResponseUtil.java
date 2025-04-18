@@ -1,4 +1,4 @@
-package com.systempayments.sistema_pagos_back.ultils;
+package com.systempayments.sistema_pagos_back.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

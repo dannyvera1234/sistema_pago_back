@@ -17,6 +17,7 @@ import com.systempayments.sistema_pagos_back.entities.Pago;
 import com.systempayments.sistema_pagos_back.enums.PagoStatus;
 import com.systempayments.sistema_pagos_back.repository.EstudianteRepository;
 import com.systempayments.sistema_pagos_back.repository.PagoReposity;
+import com.systempayments.sistema_pagos_back.utils.ResponseUtil;
 
 import jakarta.transaction.Transactional;
 
@@ -37,7 +38,6 @@ public class PagoService {
          * - Paths.get() : crea una ruta a partir de una cadena de texto
          */
         Path folderPath = Paths.get(System.getProperty("user.home"), "enset-data", "pago");
-        GeneryDto<Pago> generyDto = new GeneryDto<>();
 
         if (!Files.exists(folderPath)) {
             Files.createDirectories(folderPath);
@@ -60,12 +60,7 @@ public class PagoService {
                 .file(filePath.toUri().toString())
                 .build();
 
-        generyDto.setData(pagoReposity.save(pago));
-        generyDto.setMessage("Pago saved successfully");
-        generyDto.setSuccess(true);
-        generyDto.setCode(201);
-        generyDto.setTimesTamp(System.currentTimeMillis() + "");
-        return generyDto;
+        return ResponseUtil.success(pagoReposity.save(pago), "Pago creado exitosamente");
     }
 
     /**
@@ -87,15 +82,7 @@ public class PagoService {
     }
 
     public GeneryDto<Pago> aaactualizarPagoPorStutus(PagoStatus status, Long id) {
-        GeneryDto<Pago> generyDto = new GeneryDto<>();
-        Pago pago = pagoReposity.findById(id).get();
-        generyDto.setMessage("Pago saved successfully");
-        generyDto.setSuccess(true);
-        generyDto.setCode(201);
-        generyDto.setTimesTamp(System.currentTimeMillis() + "");
-        generyDto.setData(pago);
-
-        return generyDto;
+        return ResponseUtil.success(pagoReposity.findById(id).get(), "Pago obtenido exitosamente");
     }
 
 }
