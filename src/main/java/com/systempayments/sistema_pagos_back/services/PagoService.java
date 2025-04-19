@@ -81,7 +81,7 @@ public class PagoService {
         return Files.readAllBytes(Paths.get(URI.create(pago.getFile())));
     }
 
-    public GeneryDto<Pago> aaactualizarPagoPorStutus(PagoStatus status, Long id) {
+    public GeneryDto<Pago> actualizarPagoPorStutus(PagoStatus status, Long id) {
         return ResponseUtil.success(pagoReposity.findById(id).get(), "Pago obtenido exitosamente");
     }
 
